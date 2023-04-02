@@ -7,6 +7,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
+
 @dataclass #decorator we can directly define class variable with this
 #beacuse of this dataclass we can define train_data_path without an init function
 class DataIngestionConfig:
@@ -51,6 +54,9 @@ class DataIngestion:
 
 
 if __name__ == "__main__":
-
+    # combinign data ingestion and transformation
     obj=DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data, test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
